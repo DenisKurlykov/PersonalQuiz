@@ -22,27 +22,27 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         let animalLable = getAnymalLabel()
-        setAnimal(with: animalLable!)
+        setAnimal(with: animalLable)
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.dismiss(animated: true)
     }
+
     
 //    deinit {
 //        print("ResultViewController has been deallocated")
 //    }
-
+    
     private func getAnymalLabel() -> Animal? {
         return Dictionary(grouping: answers, by: { $0.animal })
             .sorted(by: {$0.value.count > $1.value.count})
             .first?.key
     }
     
-    private func setAnimal(with animal: Animal) {
-        resultAnimalLabel.text = "Вы - \(animal.rawValue)!"
-        descriptionAnimalLabel.text = animal.definition
-    }
+        private func setAnimal(with animal: Animal?) {
+            resultAnimalLabel.text = "Вы - \(animal?.rawValue ?? "🐶" )!"
+            descriptionAnimalLabel.text = animal?.definition ?? ""
+        }
 }
-
 
